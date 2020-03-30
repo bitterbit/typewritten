@@ -6,6 +6,9 @@
 #             A minimal, informative zsh prompt theme
 #
 
+
+TYPEWRITTEN_CURSOR="block"
+
 # git status variables
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}-> %{$fg[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
@@ -28,8 +31,8 @@ local git_info='$(git_prompt_info)$(git_prompt_status)%{$reset_color%}'
 local user_host='%{$fg[yellow]%}%n%{$reset_color%}@%{$fg[yellow]%}%m %{$reset_color%}'
 
 # default: blue, if return code other than 0: red
-local prompt_color="%(?,%{$fg[blue]%},%{$fg[red]%})"
-local prompt='${prompt_color}> %{$reset_color%}'
+local prompt_color="%(?,%{$fg[white]%},%{$fg[red]%})"
+local prompt='${prompt_color}\$ %{$reset_color%}'
 
 # current directory display
 local directory_path='%{$fg[magenta]%}%c'
@@ -45,12 +48,11 @@ if [ "$TYPEWRITTEN_MULTILINE" = true ]; then
 ${prompt}"
 else
   # left prompt definition (singleline)
-  PROMPT="${prompt}"
+  PROMPT="${directory_path} ${prompt} "
 fi
 
 # right prompt definition
-RPROMPT="${directory_path}"
-RPROMPT+="${git_info}"
+RPROMPT="${git_info}"
 RPROMPT+="${return_code}"
 
 # prompt cursor fix when exiting vim
